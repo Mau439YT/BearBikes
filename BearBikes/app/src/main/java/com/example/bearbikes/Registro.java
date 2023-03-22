@@ -13,6 +13,7 @@ public class Registro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro);
+        getSupportActionBar().hide();
     }
 
     public void registrarCiclista(View v){

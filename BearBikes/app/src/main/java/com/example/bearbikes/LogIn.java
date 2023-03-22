@@ -12,17 +12,16 @@ public class LogIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        getSupportActionBar().hide();
     }
 
     public void iniciar(View v){
-        Intent intent = new Intent(this, LogIn.class);
+        Intent intent = new Intent(this, Seleccion.class);
         startActivity(intent);
-        finish();
     }
 
     public void registrar(View v){
-        Intent intent = new Intent(this, LogIn.class);
+        Intent intent = new Intent(this, Registro.class);
         startActivity(intent);
-        finish();
     }
 }

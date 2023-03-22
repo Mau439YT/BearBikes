@@ -25,6 +25,22 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".LogIn"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Registro"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Seleccion"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".SitiosTuristicos"
+            android:exported="true">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
