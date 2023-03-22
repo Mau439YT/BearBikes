@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/BearBikes" />
+        app:srcCompat="@drawable/bearbikes" />
 
     <TextView
         android:id="@+id/textView"
@@ -22,6 +22,7 @@
         android:layout_height="0dp"
         android:background="#57000000"
         android:gravity="center"
+        android:onClick="lanzarApp"
         android:text="Presiona para iniciar"
         android:textColor="#FFFFFF"
         android:textSize="34sp"
