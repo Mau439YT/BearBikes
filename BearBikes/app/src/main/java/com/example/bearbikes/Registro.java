@@ -46,7 +46,7 @@ public class Registro extends AppCompatActivity {
         registro = (Button) findViewById(R.id.BRegistrar);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.20.110/")
+                .baseUrl("http://192.168.20.110:9009/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
