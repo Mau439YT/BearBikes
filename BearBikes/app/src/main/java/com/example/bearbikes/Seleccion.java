@@ -26,7 +26,7 @@ public class Seleccion extends AppCompatActivity {
         finish();
     }
     public void lanzarRutas(View v){
-        Intent intent = new Intent(this, LogIn.class);
+        Intent intent = new Intent(this, Rutas.class);
         startActivity(intent);
         finish();
     }

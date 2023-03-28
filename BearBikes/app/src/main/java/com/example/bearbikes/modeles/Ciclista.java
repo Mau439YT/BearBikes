@@ -9,6 +9,9 @@ public class Ciclista {
     private String apellidoMat;
     private String celular;
 
+    public Ciclista(String email, String password, String name, String apellidopat, String apellidomat, String celular) {
+    }
+
     public String getEmail() {
         return email;
     }
