@@ -45,7 +45,7 @@ public class Registro extends AppCompatActivity {
         Jpassword = (EditText) findViewById(R.id.etPassword);
         registro = (Button) findViewById(R.id.BRegistrar);
 
-        Retrofit retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.20.110:9009/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -63,14 +63,14 @@ public class Registro extends AppCompatActivity {
     public void registrarCiclista(){
 
         String name = Jname.getText().toString();
-        String apellidopat = Japellidopat.getText().toString();
-        String apellidomat = Japellidomat.getText().toString();
+        String apellidoPat = Japellidopat.getText().toString();
+        String apellidoMat = Japellidomat.getText().toString();
         String email = JEmail.getText().toString();
         String celular = Jcelular.getText().toString();
         String password = Jpassword.getText().toString();
 
 
-        Ciclista user = new Ciclista(email, password, name, apellidopat, apellidomat, celular);
+        Ciclista user = new Ciclista(email, password, name, apellidoPat, apellidoMat, celular);
         Call<Ciclista> call = ciclistaAPI.createUser(user);
 
         call.enqueue(new Callback<Ciclista>() {

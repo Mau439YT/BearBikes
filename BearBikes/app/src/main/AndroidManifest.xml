@@ -48,6 +48,18 @@
             android:name=".Rutas"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".Tienda"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Reparacion"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Status"
+            android:exported="true">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

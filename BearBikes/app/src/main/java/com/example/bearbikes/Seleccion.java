@@ -16,12 +16,12 @@ public class Seleccion extends AppCompatActivity {
     }
 
     public void lanzarTienda(View v){
-        Intent intent = new Intent(this, LogIn.class);
+        Intent intent = new Intent(this, Tienda.class);
         startActivity(intent);
         finish();
     }
     public void lanzarReparacion(View v){
-        Intent intent = new Intent(this, LogIn.class);
+        Intent intent = new Intent(this, Reparacion.class);
         startActivity(intent);
         finish();
     }

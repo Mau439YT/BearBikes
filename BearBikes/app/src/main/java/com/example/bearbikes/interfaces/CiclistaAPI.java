@@ -8,7 +8,7 @@ import retrofit2.http.POST;
 
 public interface CiclistaAPI {
 
-    @POST("api/v1/auth/register")
+    @POST("api/v1/auth/register/")
     Call<Ciclista> createUser(@Body Ciclista ciclistaRegistrar);
 
 }
