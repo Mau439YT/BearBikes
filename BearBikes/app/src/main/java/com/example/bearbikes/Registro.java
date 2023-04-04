@@ -62,21 +62,25 @@ public class Registro extends AppCompatActivity {
 
     public void registrarCiclista(){
 
+        String type =  "ciclista";
+        String email = JEmail.getText().toString();
+        String password = Jpassword.getText().toString();
         String name = Jname.getText().toString();
         String apellidoPat = Japellidopat.getText().toString();
         String apellidoMat = Japellidomat.getText().toString();
-        String email = JEmail.getText().toString();
         String celular = Jcelular.getText().toString();
-        String password = Jpassword.getText().toString();
 
+        Ciclista user = new Ciclista(type, email, password, name, apellidoPat, apellidoMat, celular);
 
-        Ciclista user = new Ciclista(email, password, name, apellidoPat, apellidoMat, celular);
         Call<Ciclista> call = ciclistaAPI.createUser(user);
 
         call.enqueue(new Callback<Ciclista>() {
             @Override
             public void onResponse(Call<Ciclista> call, Response<Ciclista> response) {
                 //Bien
+                String test = response.toString();
+                Toast.makeText(getApplicationContext(), test, Toast.LENGTH_SHORT).show();
+
                 if (response.isSuccessful()) {
                     // El usuario ha sido registrado exitosamente
                     Ciclista ciclista = response.body();

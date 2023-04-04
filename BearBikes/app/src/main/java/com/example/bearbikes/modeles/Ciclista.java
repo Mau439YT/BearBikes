@@ -8,8 +8,17 @@ public class Ciclista {
     private String apellidoPat;
     private String apellidoMat;
     private String celular;
+    private String type;
 
-    public Ciclista(String email, String password, String name, String apellidoPat, String apellidoMat, String celular) {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Ciclista(String type, String email, String password, String name, String apellidoPat, String apellidoMat, String celular) {
     }
 
     public String getEmail() {
