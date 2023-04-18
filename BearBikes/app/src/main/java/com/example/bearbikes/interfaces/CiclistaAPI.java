@@ -8,10 +8,9 @@ import retrofit2.http.POST;
 
 public interface CiclistaAPI {
 
-    final String term = "api/v1/auth/register";
 
 
-    @POST(term)
+    @POST("")
     Call<Ciclista> createUser(@Body Ciclista ciclistaRegistrar);
 
 }

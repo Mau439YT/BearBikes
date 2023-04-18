@@ -9,7 +9,6 @@
         android:id="@+id/BRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="iniciar"
         android:text="Registrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

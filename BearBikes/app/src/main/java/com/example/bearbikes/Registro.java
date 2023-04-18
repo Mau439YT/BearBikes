@@ -46,7 +46,7 @@ public class Registro extends AppCompatActivity {
         registro = (Button) findViewById(R.id.BRegistrar);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.20.110:9009/")
+                .baseUrl("http://127.0.0.1:9009/api/v1/auth/register/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -72,9 +72,13 @@ public class Registro extends AppCompatActivity {
 
         Ciclista user = new Ciclista(type, email, password, name, apellidoPat, apellidoMat, celular);
 
-        Call<Ciclista> call = ciclistaAPI.createUser(user);
+         Call<Ciclista> call = ciclistaAPI.createUser(user);
 
         call.enqueue(new Callback<Ciclista>() {
+
+
+
+
             @Override
             public void onResponse(Call<Ciclista> call, Response<Ciclista> response) {
                 //Bien
@@ -103,6 +107,7 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onFailure(Call<Ciclista> call, Throwable t) {
                 //Error
+                t.printStackTrace();
                 Toast.makeText(Registro.this, "Error al registrar usuario: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

@@ -18,7 +18,18 @@ public class Ciclista {
         this.type = type;
     }
 
+//    public Ciclista() {
+//    }
+
+
     public Ciclista(String type, String email, String password, String name, String apellidoPat, String apellidoMat, String celular) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.apellidoPat = apellidoPat;
+        this.apellidoMat = apellidoMat;
+        this.celular = celular;
+        this.type = type;
     }
 
     public String getEmail() {
