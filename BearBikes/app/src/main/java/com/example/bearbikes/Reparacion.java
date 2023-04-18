@@ -15,6 +15,11 @@ public class Reparacion extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
+    public void lanzarVerTalleres (View v){
+        Intent intent = new Intent(this, VerTalleres.class);
+        startActivity(intent);
+    }
+
     public void lanzarStatus (View v){
         Intent intent = new Intent(this, Status.class);
         startActivity(intent);

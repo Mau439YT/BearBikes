@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/button12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="volver"
+        android:text="Regresar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_thin"
+        android:text="Chat"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093" />
+
+    <EditText
+        android:id="@+id/mensajeEnviar"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Mensaje"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.321"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.836" />
+
+    <ImageView
+        android:id="@+id/btnEnviar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:onClick="enviar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.846"
+        app:srcCompat="@drawable/enviar" />
+
+    <ScrollView
+        android:layout_width="350dp"
+        android:layout_height="457dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.405">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mensajes41"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes42"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="left"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes43"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right|center_horizontal"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes2"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes3"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes4"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes5"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes6"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal|left"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes7"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes8"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes9"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes10"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes11"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes12"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes13"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes14"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes15"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes16"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes17"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes18"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes19"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes20"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes21"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes22"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes23"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes24"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes25"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes26"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes27"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes28"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes29"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes30"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes31"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes32"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes33"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes34"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes35"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes36"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+
+            <TextView
+                android:id="@+id/mensajes37"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="Mensaje" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,7 @@ public class Registro extends AppCompatActivity {
         registro = (Button) findViewById(R.id.BRegistrar);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://127.0.0.1:9009/api/v1/auth/register/")
+                .baseUrl("http://192.168.20.110:9009/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -111,6 +111,10 @@ public class Registro extends AppCompatActivity {
                 Toast.makeText(Registro.this, "Error al registrar usuario: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+
+            Intent intent = new Intent(this, LogIn.class);
+            startActivity(intent);
+            finish();
 
     }
 

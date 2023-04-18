@@ -21,21 +21,26 @@ public class Status extends AppCompatActivity {
         getSupportActionBar().hide();
 
         Nom_Mec = (TextView) findViewById(R.id.mecanico);
-        Nom_Mec.setText("Manuel Alberto");
+        Nom_Mec.setText("Alfredo Mendoza");
         Desc = (TextView) findViewById(R.id.descripcion);
-        Desc.setText("HOLAAAA");
+        Desc.setText("11320, Laguna de Términos 447, Anáhuac I Secc., Miguel Hidalgo, Ciudad de México, CDMX \nDueño: Alfredo Mendoza\nEmpleados: 4 \nTelefono: 5538752232");
         Nom_Rep = (TextView) findViewById(R.id.nom_reparacion);
         Nom_Rep.setText("Reparacion de ruedas");
         Status = (TextView) findViewById(R.id.status);
-        Status.setText("Ensamblado");
+        Status.setText("Reparando");
 
         final ProgressBar progreso = (ProgressBar) findViewById(R.id.progressBar2);
         progreso.setVisibility(View.VISIBLE);
-        progreso.setProgress(50);
+        progreso.setProgress(30);
     }
 
     public void regresar(View v){
-        Intent regresarLogin = new Intent(this, Seleccion.class);
+        Intent regresarLogin = new Intent(this, Reparacion.class);
+        startActivity(regresarLogin);
+        finish();
+    }
+    public void lanzarChat(View v){
+        Intent regresarLogin = new Intent(this, Chat.class);
         startActivity(regresarLogin);
         finish();
     }

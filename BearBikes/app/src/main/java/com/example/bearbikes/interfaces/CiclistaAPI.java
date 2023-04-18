@@ -10,7 +10,7 @@ public interface CiclistaAPI {
 
 
 
-    @POST("")
+    @POST("api/auth/v1/register/")
     Call<Ciclista> createUser(@Body Ciclista ciclistaRegistrar);
 
 }
