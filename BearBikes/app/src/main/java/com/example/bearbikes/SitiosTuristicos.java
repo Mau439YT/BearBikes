@@ -31,6 +31,13 @@ public class SitiosTuristicos extends AppCompatActivity {
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setBuiltInZoomControls(true);
     }
+
+    public void lanzarSitiosLocales(View vista){
+        Intent regresarLogin = new Intent(this, VerSitios.class);
+        startActivity(regresarLogin);
+        finish();
+    }
+
     public void regresar(View vista){
         Intent regresarLogin = new Intent(this, Seleccion.class);
         startActivity(regresarLogin);

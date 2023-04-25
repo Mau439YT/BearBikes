@@ -60,9 +60,9 @@ public class Registro extends AppCompatActivity {
         });
     }
 
-    public void registrarCiclista(){
+    public void registrarCiclista() {
 
-        String type =  "ciclista";
+        String type = "ciclista";
         String email = JEmail.getText().toString();
         String password = Jpassword.getText().toString();
         String name = Jname.getText().toString();
@@ -70,55 +70,65 @@ public class Registro extends AppCompatActivity {
         String apellidoMat = Japellidomat.getText().toString();
         String celular = Jcelular.getText().toString();
 
-        Ciclista user = new Ciclista(type, email, password, name, apellidoPat, apellidoMat, celular);
+        //Validaciones
 
-         Call<Ciclista> call = ciclistaAPI.createUser(user);
+        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || apellidoPat.isEmpty() || apellidoMat.isEmpty() || celular.isEmpty()) {
+            Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+        }if (celular.length()>15){
+            Toast.makeText(this, "Número de telefono muy largo", Toast.LENGTH_SHORT).show();
+        }if (celular.length()<8) {
+            Toast.makeText(this, "Número de telefono muy corto", Toast.LENGTH_SHORT).show();
+        }if (!email.contains("@")||!email.contains(".")){
+            Toast.makeText(this, "Ponga un email valido", Toast.LENGTH_SHORT).show();
+        }
+        else{
+        //Registro
+            Ciclista user = new Ciclista(type, email, password, name, apellidoPat, apellidoMat, celular);
 
-        call.enqueue(new Callback<Ciclista>() {
+            Call<Ciclista> call = ciclistaAPI.createUser(user);
+
+            call.enqueue(new Callback<Ciclista>() {
 
 
+                @Override
+                public void onResponse(Call<Ciclista> call, Response<Ciclista> response) {
+                    //Bien
+                    String test = response.toString();
+                    Toast.makeText(getApplicationContext(), test, Toast.LENGTH_SHORT).show();
 
-
-            @Override
-            public void onResponse(Call<Ciclista> call, Response<Ciclista> response) {
-                //Bien
-                String test = response.toString();
-                Toast.makeText(getApplicationContext(), test, Toast.LENGTH_SHORT).show();
-
-                if (response.isSuccessful()) {
-                    // El usuario ha sido registrado exitosamente
-                    Ciclista ciclista = response.body();
-                    Toast.makeText(Registro.this, "Usuario registrado correctamente", Toast.LENGTH_LONG).show();
-                } else {
-                    // Error al registrar el usuario
-                    try {
-                        String errorBody = response.errorBody().string();
-                        JSONObject jsonObject = new JSONObject(errorBody);
-                        String errorMessage = jsonObject.getString("message");
-                        Toast.makeText(Registro.this, errorMessage, Toast.LENGTH_LONG).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    if (response.isSuccessful()) {
+                        // El usuario ha sido registrado exitosamente
+                        Ciclista ciclista = response.body();
+                        Toast.makeText(Registro.this, "Usuario registrado correctamente", Toast.LENGTH_LONG).show();
+                    } else {
+                        // Error al registrar el usuario
+                        try {
+                            String errorBody = response.errorBody().string();
+                            JSONObject jsonObject = new JSONObject(errorBody);
+                            String errorMessage = jsonObject.getString("message");
+                            Toast.makeText(Registro.this, errorMessage, Toast.LENGTH_LONG).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Ciclista> call, Throwable t) {
-                //Error
-                t.printStackTrace();
-                Toast.makeText(Registro.this, "Error al registrar usuario: " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
+                @Override
+                public void onFailure(Call<Ciclista> call, Throwable t) {
+                    //Error
+                    t.printStackTrace();
+                    Toast.makeText(Registro.this, "Error al registrar usuario: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+            //Regreso
             Intent intent = new Intent(this, LogIn.class);
             startActivity(intent);
             finish();
+        }
 
     }
-
-
 
 
 
