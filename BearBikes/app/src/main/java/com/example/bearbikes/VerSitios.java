@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,11 +20,14 @@ public class VerSitios extends AppCompatActivity {
 
     BaseDeDatos BD = new BaseDeDatos(this,"BD1",null,1);
 
+    EditText sitio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.versitioslocales);
         getSupportActionBar().hide();
+
 
 
         String[] arraySpinner = new String[]{
@@ -35,6 +39,7 @@ public class VerSitios extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s.setAdapter(adapter);
 
+        sitio = (EditText) findViewById(R.id.etNS);
 
         //SQLiteDatabase db = dbHelper.getReadableDatabase();
         //String[] columnas = {"Nombre"};
@@ -50,6 +55,29 @@ public class VerSitios extends AppCompatActivity {
 
 
     }
+
+    public void validar(View vista){
+        String name = sitio.getText().toString();
+        if(name.length()==0){
+            Toast.makeText(this,"Se deben llenar todos los campos",Toast.LENGTH_SHORT).show();
+        }else{
+            try {
+                Cursor cursor = BD.VerificarUsuario(name);
+                if(cursor.getCount()>0){
+                    //Desplegar cosas
+                    startActivity(new Intent(this,Seleccion.class));
+                }else{
+                    Toast.makeText(this,"No se encontro el sitio",Toast.LENGTH_SHORT).show();
+                }
+                sitio.setText("");
+                Toast.makeText(this, "Sitio Encontrado", Toast.LENGTH_SHORT).show();
+
+            }catch(SecurityException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 
 
     public void regresar(View vista){

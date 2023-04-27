@@ -1,22 +1,50 @@
 package com.example.bearbikes.modeles;
 
-import java.util.List;
 
 public class Sitios {
-    private List<String> nombres;
-    private List<Integer> ids;
 
-    public Sitios(List<String> nombres, List<Integer> ids) {
-        this.nombres = nombres;
-        this.ids = ids;
+    private int ID;
+    private String Nombre;
+    private String Descripcion;
+    private String Direccion;
+
+    public Sitios(int ID, String nombre, String descripcion, String direccion) {
+        this.ID = ID;
+        Nombre = nombre;
+        Descripcion = descripcion;
+        Direccion = direccion;
     }
 
-    public List<String> getNombres() {
-        return nombres;
+    public int getID() {
+        return ID;
     }
 
-    public List<Integer> getIds() {
-        return ids;
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        Descripcion = descripcion;
+    }
+
+    public String getDireccion() {
+        return Direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        Direccion = direccion;
     }
 }
 

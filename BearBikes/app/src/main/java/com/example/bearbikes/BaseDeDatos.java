@@ -52,12 +52,11 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         return regCursor;
     }
 
-    public Cursor obtenerColumna(String tabla, String columna) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] columnas = {columna};
-        Cursor cursor = db.query(tabla, columnas, null, null, null, null, null);
-        return cursor;
-    }
+    //public Cursor obtenerColumna(String tabla, String columna) {
+    //    SQLiteDatabase db = dbHelper.getReadableDatabase();
+    //    Cursor cursor = db.query(tabla, columnas, null, null, null, null, null);
+    //    return cursor;
+    //}
 
 
 }
