@@ -1,26 +1,33 @@
 package com.example.bearbikes;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.bearbikes.modeles.Sitios;
+import com.example.bearbikes.modeles.Sitio;
 
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 
 public class VerSitios extends AppCompatActivity {
 
     BaseDeDatos BD = new BaseDeDatos(this,"BD1",null,1);
 
     EditText sitio;
+    ListView listViewSitios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,57 +35,58 @@ public class VerSitios extends AppCompatActivity {
         setContentView(R.layout.versitioslocales);
         getSupportActionBar().hide();
 
+        List<Sitio> Sitios = BD.getAllSitios();
 
+        listViewSitios = (ListView) findViewById(R.id.ListViewSitios);
 
-        String[] arraySpinner = new String[]{
-                "1", "2", "3", "4", "5", "6", "7"
-        };
-        Spinner s = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, arraySpinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s.setAdapter(adapter);
+        ArrayAdapter<Sitio> adapter = new ArrayAdapter<Sitio>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, Sitios);
 
-        sitio = (EditText) findViewById(R.id.etNS);
+        listViewSitios.setAdapter(adapter);
 
-        //SQLiteDatabase db = dbHelper.getReadableDatabase();
-        //String[] columnas = {"Nombre"};
-        //Cursor cursor = BD.query("Sitios", columnas, null, null, null, null, null);
-        //ArrayList<String> nombres = new ArrayList<>();
-        //while (cursor.moveToNext()) {
-        //    String nombre = cursor.getString(cursor.getColumnIndex("Nombre"));
-        //    nombres.add(nombre);
-        //}
-        //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nombres);
-        //s.setAdapter(adapter);
-        //cursor.close();
+        listViewSitios.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(VerSitios.this, "Hola", Toast.LENGTH_SHORT).show();
 
+                Sitio sitioSeleccionado = (Sitio) parent.getItemAtPosition(position);
 
-    }
+                new AlertDialog.Builder(VerSitios.this).setTitle("Sitio").setMessage("¿Qué deseas hacer?")
+                        .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent d = new Intent(VerSitios.this,SitioEditado.class);
+                                d.putExtra("sitioSeleccionado", sitioSeleccionado);
+                                startActivity(d);
+                            }
+                        }).setNegativeButton("Eliminar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                    // Eliminar el producto de la base de datos
+                                    boolean eliminado = BD.eliminarSitio(sitioSeleccionado.getID());
 
-    public void validar(View vista){
-        String name = sitio.getText().toString();
-        if(name.length()==0){
-            Toast.makeText(this,"Se deben llenar todos los campos",Toast.LENGTH_SHORT).show();
-        }else{
-            try {
-                Cursor cursor = BD.VerificarUsuario(name);
-                if(cursor.getCount()>0){
-                    //Desplegar cosas
-                    startActivity(new Intent(this,Seleccion.class));
-                }else{
-                    Toast.makeText(this,"No se encontro el sitio",Toast.LENGTH_SHORT).show();
-                }
-                sitio.setText("");
-                Toast.makeText(this, "Sitio Encontrado", Toast.LENGTH_SHORT).show();
+                                    if (eliminado) {
+                                        // Si se eliminó correctamente, actualizar la lista de productos en el adaptador
+                                        ArrayAdapter<Sitio> adapter = new ArrayAdapter<Sitio>(VerSitios.this,
+                                                android.R.layout.simple_list_item_1, android.R.id.text1, Sitios);
 
-            }catch(SecurityException e){
-                e.printStackTrace();
+                                        listViewSitios.setAdapter(adapter);
+                                        Toast.makeText(getApplicationContext(), "Producto eliminado", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "No se pudo eliminar el producto", Toast.LENGTH_SHORT).show();
+                                    }
+                                finish();
+                                startActivity(getIntent());
+                            }
+                        }).show();
             }
-        }
+
+
+        });
+        adapter.notifyDataSetChanged();
+
+
     }
-
-
 
     public void regresar(View vista){
         Intent regresarLogin = new Intent(this, SitiosTuristicos.class);
@@ -86,8 +94,13 @@ public class VerSitios extends AppCompatActivity {
         finish();
     }
     public void lanzarRegistroSitios(View vista){
-        Intent regresarLogin = new Intent(this, VerSitios.class);
+        Intent regresarLogin = new Intent(this, RegistroSitios.class);
         startActivity(regresarLogin);
         finish();
+    }
+
+    public void refrescar (View view){
+        finish();
+        startActivity(getIntent());
     }
 }

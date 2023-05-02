@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,6 +45,9 @@ public class Registro extends AppCompatActivity {
         Jcelular = (EditText) findViewById(R.id.etCelular);
         Jpassword = (EditText) findViewById(R.id.etPassword);
         registro = (Button) findViewById(R.id.BRegistrar);
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(new AuthInterceptor("tu_token_de_autenticacion"));
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.20.110:9009/")

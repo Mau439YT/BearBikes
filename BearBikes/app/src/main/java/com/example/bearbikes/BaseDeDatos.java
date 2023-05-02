@@ -9,6 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.bearbikes.modeles.Sitio;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class BaseDeDatos extends SQLiteOpenHelper {
     public BaseDeDatos(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version){
         super(context,name,factory,version);
@@ -39,24 +44,52 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         valores.put("Direccion",dir);
         this.getWritableDatabase().insert("sitios",null,valores);
     }
-    public void insertarSitiosPrueba(){
-        ContentValues valores = new ContentValues();
-        valores.put("Nombre","Hola");
-        valores.put("Descripcion","Hola");
-        valores.put("Direccion","Hola");
-        this.getWritableDatabase().insert("sitios",null,valores);
-    }
     public Cursor VerificarUsuario(String user, String pass)throws SQLException{
         Cursor regCursor = null;
         regCursor = this.getWritableDatabase().query("ciclistas",new String[]{"ID","Nombre", "Password"},"Nombre like '"+user+"'"+"and Password like '"+pass+"'",null,null,null,null);
         return regCursor;
     }
 
-    //public Cursor obtenerColumna(String tabla, String columna) {
-    //    SQLiteDatabase db = dbHelper.getReadableDatabase();
-    //    Cursor cursor = db.query(tabla, columnas, null, null, null, null, null);
-    //    return cursor;
-    //}
+    public List<Sitio> getAllSitios() {
+        List<Sitio> Sitios = new ArrayList<Sitio>();
 
+        String selectQuery = "SELECT  * FROM Sitios";
 
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Sitio Sitio = new Sitio();
+                Sitio.setID(Integer.parseInt(cursor.getString(0)));
+                Sitio.setNombre(cursor.getString(1));
+                Sitio.setDescripcion(cursor.getString(2));
+                Sitio.setDireccion(cursor.getString(3));
+                Sitios.add(Sitio);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return Sitios;
+    }
+
+    public boolean eliminarSitio(int idProducto) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int filasEliminadas = db.delete("sitios", "id = ?", new String[]{String.valueOf(idProducto)});
+        return filasEliminadas > 0;
+    }
+
+    public boolean actualizarSitio(Sitio sitio) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("Nombre", sitio.getNombre());
+        values.put("Descripcion", sitio.getDescripcion());
+        values.put("Direccion", sitio.getDireccion());
+
+        int filasActualizadas = db.update("sitios", values, "id = ?", new String[]{String.valueOf(sitio.getID())});
+        return filasActualizadas > 0;
+    }
 }

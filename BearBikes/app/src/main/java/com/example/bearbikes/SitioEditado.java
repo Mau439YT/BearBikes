@@ -8,8 +8,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RegistroSitios extends AppCompatActivity {
+import com.example.bearbikes.modeles.Sitio;
 
+public class SitioEditado extends AppCompatActivity {
     EditText edittextN, edittextD, edittextDR;
 
     BaseDeDatos BD = new BaseDeDatos(this,"BD1",null,1);
@@ -17,15 +18,23 @@ public class RegistroSitios extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registro_sitios);
+        setContentView(R.layout.editar_sitio);
         getSupportActionBar().hide();
-        edittextN=(EditText) findViewById(R.id.ETN);
-        edittextD=(EditText) findViewById(R.id.ETD);
-        edittextDR=(EditText) findViewById(R.id.ETDR);
+        edittextN=(EditText) findViewById(R.id.ETNE);
+        edittextD=(EditText) findViewById(R.id.ETDE);
+        edittextDR=(EditText) findViewById(R.id.ETDRE);
+
+        Intent intent = getIntent();
+
+        Sitio sitio1 = (Sitio) intent.getSerializableExtra("sitioSeleccionado");
+
+        edittextN.setText(sitio1.getNombre());
+        edittextD.setText(sitio1.getDescripcion());
+        edittextDR.setText(sitio1.getDireccion());
 
     }
 
-    public void onClick(View v){
+    public void onClickSE(View v){
 
         String Nom = edittextN.getText().toString();
         String Des = edittextD.getText().toString();
@@ -34,13 +43,24 @@ public class RegistroSitios extends AppCompatActivity {
         if(Nom.isEmpty()||Des.isEmpty()||Dir.isEmpty()) {
             Toast.makeText(this, "Rellena todos los campos", Toast.LENGTH_SHORT).show();
         }else{
+
+            Intent intent = getIntent();
+
+            Sitio sitio1 = (Sitio) intent.getSerializableExtra("sitioSeleccionado");
+
+            boolean eliminado = BD.eliminarSitio(sitio1.getID());
             BD.abrir();
-            BD.insertarSitios(String.valueOf(edittextN.getText()), String.valueOf(edittextD.getText()),String.valueOf(edittextDR.getText()));
+            BD.actualizarSitio(sitio1);
             BD.close();
             edittextN.setText("");
             edittextD.setText("");
             edittextDR.setText("");
-            Toast.makeText(this, "Sitio registrado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sitio editado", Toast.LENGTH_SHORT).show();
+
+
+            Intent i = new Intent (this, VerSitios.class);
+            startActivity(i);
+            finish();
         }
     }
 

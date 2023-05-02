@@ -1,19 +1,24 @@
 package com.example.bearbikes.modeles;
 
 
-public class Sitios {
+import java.io.Serializable;
+
+public class Sitio implements Serializable {
 
     private int ID;
     private String Nombre;
     private String Descripcion;
     private String Direccion;
 
-    public Sitios(int ID, String nombre, String descripcion, String direccion) {
+    public Sitio(){}
+
+    public Sitio(int ID, String nombre, String descripcion, String direccion) {
         this.ID = ID;
         Nombre = nombre;
         Descripcion = descripcion;
         Direccion = direccion;
     }
+
 
     public int getID() {
         return ID;
@@ -45,6 +50,11 @@ public class Sitios {
 
     public void setDireccion(String direccion) {
         Direccion = direccion;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + ID + " | Nombre: " + Nombre + " | Descripción: " + Descripcion + " | Dirección: " + Direccion;
     }
 }
 

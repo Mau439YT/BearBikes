@@ -84,6 +84,10 @@
             android:name=".RegistroSitios"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".SitioEditado"
+            android:exported="true">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
