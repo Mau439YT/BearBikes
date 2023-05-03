@@ -27,46 +27,28 @@
         <TextView
             android:id="@+id/child_scroll"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_height="100dp"
             android:layout_marginTop="76dp"
             android:background="#FFFFFFFF"
             android:gravity="center"
-            android:text="Hola, bienvenido a la tienda!"
+            android:text="Hola, bienvenido a la tienda! \n Da click en el producto que quieres comprar"
             android:textSize="20sp"
             app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/indicator_1"
-            android:layout_width="289dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="28dp"
-            android:background="#FFFFFFFF"
-            android:gravity="center"
-            android:text="Titulo del producto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/child_scroll" />
-
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/indicator_1"
-            app:srcCompat="@drawable/producto" />
-
-        <Button
-            android:id="@+id/button13"
-            android:layout_width="wrap_content"
+        <ListView
+            android:id="@+id/ListViewProductos"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Comprar"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+            app:layout_constraintTop_toBottomOf="@+id/child_scroll"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

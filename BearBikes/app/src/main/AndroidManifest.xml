@@ -88,6 +88,14 @@
             android:name=".SitioEditado"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".Comprar"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".Vender"
+            android:exported="true">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

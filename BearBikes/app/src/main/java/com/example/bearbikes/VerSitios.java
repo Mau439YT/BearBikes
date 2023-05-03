@@ -47,36 +47,36 @@ public class VerSitios extends AppCompatActivity {
         listViewSitios.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(VerSitios.this, "Hola", Toast.LENGTH_SHORT).show();
 
                 Sitio sitioSeleccionado = (Sitio) parent.getItemAtPosition(position);
 
                 new AlertDialog.Builder(VerSitios.this).setTitle("Sitio").setMessage("¿Qué deseas hacer?")
-                        .setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent d = new Intent(VerSitios.this,SitioEditado.class);
-                                d.putExtra("sitioSeleccionado", sitioSeleccionado);
-                                startActivity(d);
-                            }
-                        }).setNegativeButton("Eliminar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                    // Eliminar el producto de la base de datos
-                                    boolean eliminado = BD.eliminarSitio(sitioSeleccionado.getID());
+                                //Intent d = new Intent(VerSitios.this,SitioEditado.class);
+                                //d.putExtra("sitioSeleccionado", sitioSeleccionado);
+                                //startActivity(d);
+                                // Eliminar el producto de la base de datos
+                                boolean eliminado = BD.eliminarSitio(sitioSeleccionado.getID());
 
-                                    if (eliminado) {
-                                        // Si se eliminó correctamente, actualizar la lista de productos en el adaptador
-                                        ArrayAdapter<Sitio> adapter = new ArrayAdapter<Sitio>(VerSitios.this,
-                                                android.R.layout.simple_list_item_1, android.R.id.text1, Sitios);
+                                if (eliminado) {
+                                    // Si se eliminó correctamente, actualizar la lista de productos en el adaptador
+                                    ArrayAdapter<Sitio> adapter = new ArrayAdapter<Sitio>(VerSitios.this,
+                                            android.R.layout.simple_list_item_1, android.R.id.text1, Sitios);
 
-                                        listViewSitios.setAdapter(adapter);
-                                        Toast.makeText(getApplicationContext(), "Producto eliminado", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No se pudo eliminar el producto", Toast.LENGTH_SHORT).show();
-                                    }
+                                    listViewSitios.setAdapter(adapter);
+                                    Toast.makeText(getApplicationContext(), "Producto eliminado", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "No se pudo eliminar el producto", Toast.LENGTH_SHORT).show();
+                                }
                                 finish();
                                 startActivity(getIntent());
+                            }
+                        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(VerSitios.this, "Ta bueno", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
             }

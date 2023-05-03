@@ -48,7 +48,6 @@ public class SitioEditado extends AppCompatActivity {
 
             Sitio sitio1 = (Sitio) intent.getSerializableExtra("sitioSeleccionado");
 
-            boolean eliminado = BD.eliminarSitio(sitio1.getID());
             BD.abrir();
             BD.actualizarSitio(sitio1);
             BD.close();
