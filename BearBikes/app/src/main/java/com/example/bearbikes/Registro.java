@@ -11,25 +11,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bearbikes.interfaces.CiclistaAPI;
 import com.example.bearbikes.modeles.Ciclista;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class Registro extends AppCompatActivity {
 
     private EditText JEmail, Jpassword, Jname, Japellidopat, Japellidomat, Jcelular;
     private Button registro;
 
-    private Retrofit retrofit;
     private CiclistaAPI ciclistaAPI;
 
     @Override
@@ -46,16 +47,6 @@ public class Registro extends AppCompatActivity {
         Jpassword = (EditText) findViewById(R.id.etPassword);
         registro = (Button) findViewById(R.id.BRegistrar);
 
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.addInterceptor(new AuthInterceptor("tu_token_de_autenticacion"));
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.20.110:9009/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ciclistaAPI = retrofit.create(CiclistaAPI.class);
-
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,12 +58,12 @@ public class Registro extends AppCompatActivity {
     public void registrarCiclista() {
 
         String type = "ciclista";
-        String email = JEmail.getText().toString();
-        String password = Jpassword.getText().toString();
-        String name = Jname.getText().toString();
-        String apellidoPat = Japellidopat.getText().toString();
-        String apellidoMat = Japellidomat.getText().toString();
-        String celular = Jcelular.getText().toString();
+        String email = JEmail.getText().toString().trim();
+        String password = Jpassword.getText().toString().trim();
+        String name = Jname.getText().toString().trim();
+        String apellidoPat = Japellidopat.getText().toString().trim();
+        String apellidoMat = Japellidomat.getText().toString().trim();
+        String celular = Jcelular.getText().toString().trim();
 
         //Validaciones
 
@@ -87,56 +78,68 @@ public class Registro extends AppCompatActivity {
         }
         else{
         //Registro
-            Ciclista user = new Ciclista(type, email, password, name, apellidoPat, apellidoMat, celular);
 
-            Call<Ciclista> call = ciclistaAPI.createUser(user);
+            // URL de la API de registro de usuarios
+            String url = "http://192.168.20.47:9009/api/v1/auth/register";
 
-            call.enqueue(new Callback<Ciclista>() {
+            // Crear un objeto Usuario con los datos ingresados
+            Ciclista ciclista = new Ciclista(type, email, password, name, apellidoPat, apellidoMat, celular);
 
+            // Crea un objeto OkHttpClient
+            OkHttpClient client = new OkHttpClient();
 
+            // Convierte el objeto Usuario a JSON
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+            Gson gson = new Gson();
+            String jsonBody = gson.toJson(ciclista);
+
+            RequestBody requestBody = RequestBody.create(jsonBody, JSON);
+
+            // Crea una solicitud POST con la URL y el cuerpo JSON
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
+
+            // Envía la solicitud de manera asíncrona
+            client.newCall(request).enqueue(new Callback() {
                 @Override
-                public void onResponse(Call<Ciclista> call, Response<Ciclista> response) {
-                    //Bien
-                    String test = response.toString();
-                    Toast.makeText(getApplicationContext(), test, Toast.LENGTH_SHORT).show();
-
-                    if (response.isSuccessful()) {
-                        // El usuario ha sido registrado exitosamente
-                        Ciclista ciclista = response.body();
-                        Toast.makeText(Registro.this, "Usuario registrado correctamente", Toast.LENGTH_LONG).show();
-                    } else {
-                        // Error al registrar el usuario
-                        try {
-                            String errorBody = response.errorBody().string();
-                            JSONObject jsonObject = new JSONObject(errorBody);
-                            String errorMessage = jsonObject.getString("message");
-                            Toast.makeText(Registro.this, errorMessage, Toast.LENGTH_LONG).show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                public void onResponse(Call call, Response response) {
+                    // Manejar la respuesta de la solicitud
+                    final String responseBody = response.body().toString();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (response.isSuccessful()) {
+                                // La solicitud fue exitosa
+                                Toast.makeText(Registro.this, "Registro exitoso: " + responseBody, Toast.LENGTH_SHORT).show();
+                            } else {
+                                // La solicitud falló
+                                Toast.makeText(Registro.this, "Error en el registro: " + responseBody, Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
+                    });
                 }
 
                 @Override
-                public void onFailure(Call<Ciclista> call, Throwable t) {
-                    //Error
-                    t.printStackTrace();
-                    Toast.makeText(Registro.this, "Error al registrar usuario: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
+                    // Manejar el error en caso de falla de la solicitud
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(Registro.this, "Error en el registro", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
+
             });
-            //Regreso
-            Intent intent = new Intent(this, LogIn.class);
-            startActivity(intent);
-            finish();
-        }
-
+        }//Fin del else
+        //Regreso
+        Intent intent = new Intent(this, LogIn.class);
+        startActivity(intent);
+        finish();
     }
-
-
-
-
-
 
 }

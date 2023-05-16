@@ -10,9 +10,6 @@ import android.widget.Toast;
 import com.example.bearbikes.interfaces.CiclistaAPI;
 import com.example.bearbikes.modeles.Ciclista;
 
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
