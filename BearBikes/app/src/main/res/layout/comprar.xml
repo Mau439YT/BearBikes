@@ -28,12 +28,12 @@
             android:id="@+id/child_scroll"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginTop="76dp"
+            android:layout_marginTop="84dp"
             android:background="#FFFFFFFF"
             android:gravity="center"
             android:text="Hola, bienvenido a la tienda! \n Da click en el producto que quieres comprar"
             android:textSize="20sp"
-            app:layout_constraintHorizontal_bias="0.531"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,6 +49,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/child_scroll"
             app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="136dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/child_scroll"
+            app:srcCompat="@drawable/producto" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
