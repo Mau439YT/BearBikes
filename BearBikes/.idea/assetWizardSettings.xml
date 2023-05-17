@@ -114,9 +114,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="foregroundLayerName" value="logo_image" />
-                                      <entry key="legacyIconShape" value="CIRCLE" />
+                                      <entry key="backgroundColor" value="000000" />
+                                      <entry key="foregroundAssetType" value="CLIP_ART" />
                                     </map>
                                   </option>
                                 </PersistentState>

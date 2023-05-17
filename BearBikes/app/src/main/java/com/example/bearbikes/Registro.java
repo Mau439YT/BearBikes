@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.bearbikes.interfaces.CiclistaAPI;
 import com.example.bearbikes.modeles.Ciclista;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +30,7 @@ import okhttp3.Response;
 public class Registro extends AppCompatActivity {
 
     private EditText JEmail, Jpassword, Jname, Japellidopat, Japellidomat, Jcelular;
-    private Button registro;
+    private Button registro,regresar;
 
     private CiclistaAPI ciclistaAPI;
 
@@ -105,15 +106,22 @@ public class Registro extends AppCompatActivity {
             // Envía la solicitud de manera asíncrona
             client.newCall(request).enqueue(new Callback() {
                 @Override
-                public void onResponse(Call call, Response response) {
+                public void onResponse(Call call, Response response) throws IOException {
                     // Manejar la respuesta de la solicitud
-                    final String responseBody = response.body().toString();
+                    final String responseBody = response.body().string();
+                    Gson jsonRespuesta = new Gson();
+                    JsonObject objetoJson = jsonRespuesta.fromJson(responseBody, JsonObject.class);
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             if (response.isSuccessful()) {
                                 // La solicitud fue exitosa
-                                Toast.makeText(Registro.this, "Registro exitoso: " + responseBody, Toast.LENGTH_SHORT).show();
+                                System.out.println("Registro exitoso: " + objetoJson.get("message").getAsString());
+                                Toast.makeText(Registro.this, "Solicitud exitosa: " + objetoJson.get("message").getAsString(), Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(Registro.this, LogIn.class);
+                                startActivity(intent);
+                                finish();
                             } else {
                                 // La solicitud falló
                                 Toast.makeText(Registro.this, "Error en el registro: " + responseBody, Toast.LENGTH_SHORT).show();
@@ -137,8 +145,12 @@ public class Registro extends AppCompatActivity {
             });
         }//Fin del else
         //Regreso
-        Intent intent = new Intent(this, LogIn.class);
-        startActivity(intent);
+
+    }
+
+    public void regresarA(View v) {
+        Intent i = new Intent(this, LogIn.class);
+        startActivity(i);
         finish();
     }
 
