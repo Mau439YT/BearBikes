@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Locale;
+
 public class Seleccion extends AppCompatActivity {
 String nombre;
 String rol;
@@ -24,6 +26,8 @@ TextView saludo;
         nombre= i.getStringExtra("nombre");
         correo= i.getStringExtra("correo");
         rol= i.getStringExtra("rol");
+
+        rol = rol.toLowerCase();
 
         saludo=(TextView) findViewById(R.id.etSaludo);
 

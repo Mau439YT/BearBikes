@@ -73,6 +73,10 @@ public class LogIn extends AppCompatActivity {
             Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(!email.contains("@") || !email.contains(".")){
+            Toast.makeText(this, "Ingresa el formato correcto de correo", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         String url = "http://192.168.20.47:9009/api/v1/auth/authenticate";
 
