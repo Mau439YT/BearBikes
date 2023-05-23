@@ -1,7 +1,6 @@
 package com.example.bearbikes;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.auth0.android.jwt.JWT;
-import com.example.bearbikes.modeles.Ciclista;
 import com.example.bearbikes.modeles.CiclistaInicio.CiclistaInicio;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -22,7 +20,6 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -35,6 +32,7 @@ public class LogIn extends AppCompatActivity {
     Button BtnLogin;
     ProgressBar Circ;
 
+    String url = "http://192.168.20.47:9009/api/v1/auth/authenticate";
 
     private JWT token;
     private String nombre;
@@ -78,7 +76,7 @@ public class LogIn extends AppCompatActivity {
             return;
         }
 
-        String url = "http://192.168.20.47:9009/api/v1/auth/authenticate";
+
 
         // Crear un objeto Usuario con los datos ingresados
         CiclistaInicio ciclista = new CiclistaInicio(email, password);
@@ -113,7 +111,11 @@ public class LogIn extends AppCompatActivity {
                     public void run() {
                         if (response.isSuccessful()) {
                             // La solicitud fue exitosa
-                            System.out.println("Registro exitoso: " + objetoJson.get("message").getAsString());
+                            if(!objetoJson.get("message").getAsString().equals("Sesión iniciada correctamente")){
+                                Toast.makeText(LogIn.this, "Error en el inicio de sesión: " + objetoJson.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+                                Circ.setVisibility(View.INVISIBLE);
+                                return;
+                            }
                             Toast.makeText(LogIn.this, objetoJson.get("message").getAsString(), Toast.LENGTH_SHORT).show();
                             System.out.println("Token recibido =>" + objetoJson.get("token").getAsString());
                             token= new JWT(objetoJson.get("token").getAsString());
@@ -122,16 +124,51 @@ public class LogIn extends AppCompatActivity {
                             rol = token.getClaim("role").asString();
                             emailToken = token.getClaim("username").asString();
                             Log.d("mensaje",String.format("NOMBRE: %s || ROLE: %s || EMAIL: %s ", nombre, rol, emailToken));
-                            Intent intent = new Intent(LogIn.this, Seleccion.class);
-                            intent.putExtra("nombre", nombre);
-                            intent.putExtra("rol", rol);
-                            intent.putExtra("correo", emailToken);
 
-                            startActivity(intent);
-                            finish();
+                            if(rol.equals("CICLISTA")){
+                                Intent intent = new Intent(LogIn.this, Seleccion2.class);
+                                intent.putExtra("nombre", nombre);
+                                intent.putExtra("rol", rol);
+                                intent.putExtra("correo", emailToken);
+                                Circ.setVisibility(View.INVISIBLE);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            if(rol.equals("DUEÑO_TALLER")){
+                                Intent intent = new Intent(LogIn.this, Seleccion2.class);
+                                intent.putExtra("nombre", nombre);
+                                intent.putExtra("rol", rol);
+                                intent.putExtra("correo", emailToken);
+                                Circ.setVisibility(View.INVISIBLE);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            if(rol.equals("DUEÑO_COMERCIO")){
+                                Intent intent = new Intent(LogIn.this, Seleccion2.class);
+                                intent.putExtra("nombre", nombre);
+                                intent.putExtra("rol", rol);
+                                intent.putExtra("correo", emailToken);
+                                Circ.setVisibility(View.INVISIBLE);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            if(rol.equals("ADMINISTRADOR")){
+                                Intent intent = new Intent(LogIn.this, Seleccion2.class);
+                                intent.putExtra("nombre", nombre);
+                                intent.putExtra("rol", rol);
+                                intent.putExtra("correo", emailToken);
+                                Circ.setVisibility(View.INVISIBLE);
+                                startActivity(intent);
+                                finish();
+                            }
+
                         } else {
                             // La solicitud falló
                             Toast.makeText(LogIn.this, "Error en el inicio de sesión: " + objetoJson.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+                            Circ.setVisibility(View.INVISIBLE);
                         }
                     }
                 });

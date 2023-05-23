@@ -32,6 +32,8 @@ public class Registro extends AppCompatActivity {
     private EditText JEmail, Jpassword, Jname, Japellidopat, Japellidomat, Jcelular;
     private Button registro,regresar;
 
+    String url = "http://192.168.20.47:9009/api/v1/auth/register";
+
     private CiclistaAPI ciclistaAPI;
 
     @Override
@@ -81,7 +83,7 @@ public class Registro extends AppCompatActivity {
         //Registro
 
             // URL de la API de registro de usuarios
-            String url = "http://192.168.20.47:9009/api/v1/auth/register";
+
 
             // Crear un objeto Usuario con los datos ingresados
             Ciclista ciclista = new Ciclista(type, email, password, name, apellidoPat, apellidoMat, celular);

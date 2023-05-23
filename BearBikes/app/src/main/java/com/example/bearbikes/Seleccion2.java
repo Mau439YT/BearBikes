@@ -7,18 +7,27 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Seleccion extends AppCompatActivity {
-String nombre;
-String rol;
-String correo;
+public class Seleccion2 extends AppCompatActivity {
+    String nombre;
+    String rol;
+    String correo;
 
-TextView saludo;
+    TextView saludo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.seleccion);
+        setContentView(R.layout.seleccion2);
         getSupportActionBar().hide();
 
+        Intent i = getIntent();
+
+        nombre= i.getStringExtra("nombre");
+        correo= i.getStringExtra("correo");
+        rol= i.getStringExtra("rol");
+
+        saludo=(TextView) findViewById(R.id.etSaludo);
+
+        saludo.setText(String.format("Bienvenido %s %s",rol,nombre));
     }
 
 

@@ -1,6 +1,8 @@
 package com.example.bearbikes;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -29,5 +31,11 @@ public class Comprar extends AppCompatActivity {
         ArrayAdapter<Sitio> adapter = new ArrayAdapter<Sitio>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, Sitios);
         listViewSitios.setAdapter(adapter);
+    }
+
+    public void volver (View v){
+        Intent i = new Intent(this, Tienda.class);
+        startActivity(i);
+        finish();
     }
 }
