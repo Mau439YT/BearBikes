@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="lanzarRegistroSitios"
-        android:text="Registrar sitios"
+        android:text="Registrar producto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.113"
@@ -24,7 +24,7 @@
         android:onClick="refrescar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.932"
@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="0.941" />
 
     <ListView
-        android:id="@+id/ListViewSitios"
+        android:id="@+id/ListViewMisProductos"
         android:layout_width="409dp"
         android:layout_height="525dp"
         android:foregroundGravity="center_vertical|center"

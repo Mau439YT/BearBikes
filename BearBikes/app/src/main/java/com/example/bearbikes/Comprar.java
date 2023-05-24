@@ -33,6 +33,41 @@ public class Comprar extends AppCompatActivity {
         listViewSitios.setAdapter(adapter);
     }
 
+    public void lanzarRefaccionesCompletas (View v){
+        Intent i = new Intent(this, ProductoSeleccionado.class);
+        i.putExtra("Producto","Refacciones Completas");
+        startActivity(i);
+        finish();
+    }
+
+    public void lanzarLlantas (View v){
+        Intent i = new Intent(this, ProductoSeleccionado.class);
+        i.putExtra("Producto","Llantas");
+        startActivity(i);
+        finish();
+    }
+
+    public void lanzarPedales (View v){
+        Intent i = new Intent(this, ProductoSeleccionado.class);
+        i.putExtra("Producto","Pedales");
+        startActivity(i);
+        finish();
+    }
+
+    public void lanzarSeguro (View v){
+        Intent i = new Intent(this, ProductoSeleccionado.class);
+        i.putExtra("Producto","Seguro");
+        startActivity(i);
+        finish();
+    }
+
+    public void lanzarFrenos (View v){
+        Intent i = new Intent(this, ProductoSeleccionado.class);
+        i.putExtra("Producto","Frenos");
+        startActivity(i);
+        finish();
+    }
+
     public void volver (View v){
         Intent i = new Intent(this, Tienda.class);
         startActivity(i);

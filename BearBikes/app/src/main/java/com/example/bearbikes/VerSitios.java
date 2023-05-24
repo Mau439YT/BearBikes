@@ -2,7 +2,6 @@ package com.example.bearbikes;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,10 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bearbikes.modeles.Sitio;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
 public class VerSitios extends AppCompatActivity {
@@ -37,7 +32,7 @@ public class VerSitios extends AppCompatActivity {
 
         List<Sitio> Sitios = BD.getAllSitios();
 
-        listViewSitios = (ListView) findViewById(R.id.ListViewSitios);
+        listViewSitios = (ListView) findViewById(R.id.ListViewMisProductos);
 
         ArrayAdapter<Sitio> adapter = new ArrayAdapter<Sitio>(this,
                 android.R.layout.simple_list_item_1, android.R.id.text1, Sitios);

@@ -1,6 +1,5 @@
 package com.example.bearbikes.modeles;
 
-
 import java.io.Serializable;
 
 public class Sitio implements Serializable {

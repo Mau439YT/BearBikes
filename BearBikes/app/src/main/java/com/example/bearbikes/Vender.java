@@ -1,6 +1,7 @@
 package com.example.bearbikes;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,5 +12,9 @@ public class Vender extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vender);
         getSupportActionBar().hide();
+    }
+
+    public void lanzarMisProductos (View v){
+
     }
 }
