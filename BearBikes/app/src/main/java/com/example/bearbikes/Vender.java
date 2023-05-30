@@ -1,5 +1,6 @@
 package com.example.bearbikes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,6 +16,14 @@ public class Vender extends AppCompatActivity {
     }
 
     public void lanzarMisProductos (View v){
+        //Intent i = new Intent(this, MisProductos.class);
+        //startActivity(i);
+        //finish();
+    }
 
+    public void lanzarVenderProducto (View v){
+        //Intent i = new Intent(this, RegistroProducto.class);
+        //startActivity(i);
+        //finish();
     }
 }

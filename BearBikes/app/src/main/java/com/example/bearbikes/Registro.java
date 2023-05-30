@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class Registro extends AppCompatActivity {
 
     private EditText JEmail, Jpassword, Jname, Japellidopat, Japellidomat, Jcelular;
     private Button registro,regresar;
+    ProgressBar Circ;
 
     String url = "http://192.168.20.47:9009/api/v1/auth/register";
 
@@ -56,6 +58,9 @@ public class Registro extends AppCompatActivity {
                 registrarCiclista();
             }
         });
+
+        Circ= (ProgressBar)findViewById(R.id.progressBar3);
+        Circ.setVisibility(View.INVISIBLE);
     }
 
     public void registrarCiclista() {
@@ -106,6 +111,7 @@ public class Registro extends AppCompatActivity {
                     .build();
 
             // Envía la solicitud de manera asíncrona
+            Circ.setVisibility(View.VISIBLE);
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
@@ -119,6 +125,7 @@ public class Registro extends AppCompatActivity {
                         public void run() {
                             if (response.isSuccessful()) {
                                 // La solicitud fue exitosa
+                                Circ.setVisibility(View.INVISIBLE);
                                 System.out.println("Registro exitoso: " + objetoJson.get("message").getAsString());
                                 Toast.makeText(Registro.this, "Solicitud exitosa: " + objetoJson.get("message").getAsString(), Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(Registro.this, LogIn.class);
@@ -126,6 +133,7 @@ public class Registro extends AppCompatActivity {
                                 finish();
                             } else {
                                 // La solicitud falló
+                                Circ.setVisibility(View.INVISIBLE);
                                 Toast.makeText(Registro.this, "Error en el registro: " + responseBody, Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -139,6 +147,7 @@ public class Registro extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            Circ.setVisibility(View.INVISIBLE);
                             Toast.makeText(Registro.this, "Error en el registro", Toast.LENGTH_SHORT).show();
                         }
                     });

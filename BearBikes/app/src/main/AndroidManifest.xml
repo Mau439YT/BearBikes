@@ -104,6 +104,14 @@
             android:name=".ProductoSeleccionado"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".RegistroProducto"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".MisProductos"
+            android:exported="true">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

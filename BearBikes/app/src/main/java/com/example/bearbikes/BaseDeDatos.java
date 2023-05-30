@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.bearbikes.modeles.Producto;
 import com.example.bearbikes.modeles.Sitio;
 import com.example.bearbikes.modeles.Taller;
 
@@ -21,11 +22,11 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db){
-        String query = "create table ciclistas(ID integer primary key autoincrement,"+"Nombre text, Password text)";
-        db.execSQL(query);
-        String query2 = "create table sitios (ID integer primary key autoincrement,"+"Nombre text, Descripcion text ,Direccion text)";
+        String query1 = "create table sitios (ID integer primary key autoincrement,"+"Nombre text, Descripcion text ,Direccion text)";
+        db.execSQL(query1);
+        String query2 = "create table talleres (ID integer primary key autoincrement,"+"Nombre text, Descripcion text ,Direccion text)";
         db.execSQL(query2);
-        String query3 = "create table talleres (ID integer primary key autoincrement,"+"Nombre text, Descripcion text ,Direccion text)";
+        String query3 = "create table productos (ID integer primary key autoincrement,"+"Nombre text, Descripcion text ,Direccion text)";
         db.execSQL(query3);
     }
 
@@ -41,6 +42,22 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         valores.put("Descripcion",des);
         valores.put("Direccion",dir);
         this.getWritableDatabase().insert("sitios",null,valores);
+    }
+
+    public void insertarProductos(String nom, String des, String dir){
+        ContentValues valores = new ContentValues();
+        valores.put("Nombre",nom);
+        valores.put("Descripcion",des);
+        valores.put("Direccion",dir);
+        this.getWritableDatabase().insert("productos",null,valores);
+    }
+
+    public void insertarProductoPrueba(){
+        ContentValues valores = new ContentValues();
+        valores.put("Nombre","Manivela");
+        valores.put("Descripcion","Eaeaea");
+        valores.put("Direccion","Aqui");
+        this.getWritableDatabase().insert("productos",null,valores);
     }
 
     public List<Sitio> getAllSitios() {
@@ -68,9 +85,40 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         return Sitios;
     }
 
+    public List<Producto> getAllProductos() {
+        List<Producto> Productos = new ArrayList<Producto>();
+
+        String selectQuery = "SELECT * FROM Sitios";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Producto Producto = new Producto();
+                Producto.setID(Integer.parseInt(cursor.getString(0)));
+                Producto.setNombre(cursor.getString(1));
+                Producto.setDescripcion(cursor.getString(2));
+                Producto.setDireccion(cursor.getString(3));
+                Productos.add(Producto);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return Productos;
+    }
+
     public boolean eliminarSitio(int idProducto) {
         SQLiteDatabase db = this.getWritableDatabase();
         int filasEliminadas = db.delete("sitios", "id = ?", new String[]{String.valueOf(idProducto)});
+        return filasEliminadas > 0;
+    }
+
+    public boolean eliminarProducto(int idProducto) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int filasEliminadas = db.delete("productos", "id = ?", new String[]{String.valueOf(idProducto)});
         return filasEliminadas > 0;
     }
 
@@ -83,6 +131,18 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         values.put("Direccion", sitio.getDireccion());
 
         int filasActualizadas = db.update("sitios", values, "id = ?", new String[]{String.valueOf(sitio.getID())});
+        return filasActualizadas > 0;
+    }
+
+    public boolean actualizarProducto(Producto producto) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("Nombre", producto.getNombre());
+        values.put("Descripcion", producto.getDescripcion());
+        values.put("Direccion", producto.getDireccion());
+
+        int filasActualizadas = db.update("productos", values, "id = ?", new String[]{String.valueOf(producto.getID())});
         return filasActualizadas > 0;
     }
 
