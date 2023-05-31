@@ -83,6 +83,8 @@ public class Registro extends AppCompatActivity {
             Toast.makeText(this, "Número de telefono muy corto", Toast.LENGTH_SHORT).show();
         }if (!email.contains("@")||!email.contains(".")){
             Toast.makeText(this, "Ponga un email valido", Toast.LENGTH_SHORT).show();
+        }if (password.length()<8){
+            Toast.makeText(this, "Contraseña muy corta", Toast.LENGTH_SHORT).show();
         }
         else{
         //Registro
